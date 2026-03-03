@@ -1,23 +1,27 @@
 export type AssetType = 'Equity' | 'Bond' | 'Forex';
+export type MarketZone = 'US' | 'EU' | 'ASIA' | 'FX';
 
 export interface Security {
   id: number;
   symbol: string;
   name: string;
   assetType: AssetType;
+  marketZone: MarketZone;
   exchange: string;
   currency: string;
   createdAt: string;
 }
 
-export interface Quote {
-  currentPrice: number;
-  change: number;
-  percentChange: number;
+export interface LiveData {
+  dayChangePercent: number;
+}
+
+export interface EodData {
+  date: string;         // "2026-03-03"
+  close: number;
   high: number;
   low: number;
-  open: number;
-  previousClose: number;
+  marketCapMillions: number | null;
 }
 
 export interface Metrics {
@@ -37,13 +41,14 @@ export interface WatchlistItem {
   symbol: string;
   name: string;
   assetType: AssetType;
+  marketZone: MarketZone;
   currency: string;
   addedAt: string;
-  quote: Quote | null;
-  marketCapMillions: number | null;
   industry: string | null;
   logo: string | null;
-  metrics: Metrics | null;
+  live: LiveData | null;
+  eod: EodData | null;
+  ytdReturn: number | null;
 }
 
 export interface EodPrice {
@@ -55,4 +60,5 @@ export interface EodPrice {
   low: number;
   close: number;
   volume: number;
+  marketCapMillions: number | null;
 }

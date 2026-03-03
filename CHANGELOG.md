@@ -4,6 +4,19 @@
 
 ---
 
+## v0.1.0-beta.7 — 2026-03-04
+
+### Changed
+- Watchlist table now clearly distinguishes live vs EOD data:
+  - **Price**, **YTD %**, **Mkt Cap** — sourced from EOD DB record, labelled `(EOD)`
+  - **Day %** — live intraday, pulsing green `live` badge in column header
+  - EOD date badge shown next to Price and Mkt Cap (e.g. `03 Mar`)
+  - Stale data warning: yellow badge if EOD is >1 day old
+- Market zone badge shown per row (US / EU / ASIA / FX)
+- Types restructured: `live`, `eod` objects on `WatchlistItem`
+
+---
+
 ## v0.1.0-beta.6 — 2026-03-03
 
 ### Changed
