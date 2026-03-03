@@ -4,6 +4,20 @@
 
 ---
 
+## v0.1.0-beta.10 — 2026-03-04
+
+### Fixed
+- YTD % column header was incorrectly labelled `(EOD)` — it is fetched live from Finnhub on every refresh but is EOD-based (only changes after market close, not stored in DB)
+
+### Changed
+- Three distinct data-source indicators in column headers:
+  - 🟢 `live` (pulsing) — intraday, refreshed every 30s (Day %)
+  - `↻ provider` — fetched from provider on each refresh, EOD-based (YTD %)
+  - `db` — stored in local DB, updated nightly by background job (Price, Mkt Cap)
+- Hover tooltips on all three badges explain the source
+
+---
+
 ## v0.1.0-beta.7 — 2026-03-04
 
 ### Changed

@@ -37,9 +37,25 @@ function EodBadge({ date }: { date: string | null | undefined }) {
 
 function LiveBadge() {
   return (
-    <span className="inline-flex items-center gap-1 text-xs text-emerald-500">
+    <span className="inline-flex items-center gap-1 text-xs text-emerald-500" title="Refreshed every 30s — intraday">
       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
       live
+    </span>
+  );
+}
+
+function ProviderBadge() {
+  return (
+    <span className="text-xs text-sky-700 font-normal normal-case" title="Fetched from provider on each refresh — EOD-based, updates after market close">
+      ↻ provider
+    </span>
+  );
+}
+
+function DbBadge() {
+  return (
+    <span className="text-xs text-gray-600 font-normal normal-case" title="Stored in local DB — updated nightly by background job">
+      db
     </span>
   );
 }
@@ -58,16 +74,16 @@ export default function WatchlistTable({ items, onRemove, loading }: Props) {
             <th className="px-4 py-3 text-left">Name</th>
             <th className="px-4 py-3 text-left">Industry</th>
             <th className="px-4 py-3 text-right">
-              <div className="flex items-center justify-end gap-1.5">Price <span className="normal-case font-normal text-gray-600">(EOD)</span></div>
+              <div className="flex items-center justify-end gap-1.5">Price <DbBadge /></div>
             </th>
             <th className="px-4 py-3 text-right">
               <div className="flex items-center justify-end gap-1.5">Day % <LiveBadge /></div>
             </th>
             <th className="px-4 py-3 text-right">
-              <div className="flex items-center justify-end gap-1.5">YTD % <span className="normal-case font-normal text-gray-600">(EOD)</span></div>
+              <div className="flex items-center justify-end gap-1.5">YTD % <ProviderBadge /></div>
             </th>
             <th className="px-4 py-3 text-right">
-              <div className="flex items-center justify-end gap-1.5">Mkt Cap <span className="normal-case font-normal text-gray-600">(EOD)</span></div>
+              <div className="flex items-center justify-end gap-1.5">Mkt Cap <DbBadge /></div>
             </th>
             <th className="px-4 py-3"></th>
           </tr>
