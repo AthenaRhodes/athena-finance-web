@@ -3,6 +3,7 @@ import type { WatchlistItem } from './types';
 import { watchlistApi } from './services/api';
 import WatchlistTable from './components/WatchlistTable';
 import AddSecurityForm from './components/AddSecurityForm';
+import VersionBadge from './components/VersionBadge';
 
 const REFRESH_INTERVAL = 30_000; // 30s
 
@@ -41,11 +42,14 @@ export default function App() {
           <span className="text-xl">🦉</span>
           <h1 className="text-lg font-semibold tracking-tight">Athena Finance</h1>
         </div>
-        {lastUpdated && (
-          <span className="text-xs text-gray-500">
-            Updated {lastUpdated.toLocaleTimeString()}
-          </span>
-        )}
+        <div className="flex items-center gap-4">
+          {lastUpdated && (
+            <span className="text-xs text-gray-500">
+              Updated {lastUpdated.toLocaleTimeString()}
+            </span>
+          )}
+          <VersionBadge />
+        </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-6 py-8 space-y-6">
