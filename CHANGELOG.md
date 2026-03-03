@@ -4,6 +4,15 @@
 
 ---
 
+## v0.1.0-beta.11 — 2026-03-04
+
+### Added
+- **Auto-refresh toggle** in header — click to pause/resume live price refresh
+- Shows pulsing green `Live` when active, grey `Paused` when off
+- Hover tooltip explains current state
+
+---
+
 ## v0.1.0-beta.10 — 2026-03-04
 
 ### Fixed
