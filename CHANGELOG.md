@@ -4,6 +4,14 @@
 
 ---
 
+## v0.1.0-beta.6 — 2026-03-03
+
+### Changed
+- Watchlist table streamlined — removed: 52W High, 52W Low, Change (value), Day High, Day Low
+- Kept columns: Symbol, Name, Industry, Price, **Day %**, **YTD %**, **Mkt Cap**
+
+---
+
 ## v0.1.0-beta.5 — 2026-03-03
 
 ### Added
