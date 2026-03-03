@@ -28,6 +28,9 @@ export interface WatchlistItem {
   currency: string;
   addedAt: string;
   quote: Quote | null;
+  marketCapMillions: number | null;
+  industry: string | null;
+  logo: string | null;
 }
 
 export interface EodPrice {

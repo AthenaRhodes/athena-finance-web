@@ -4,6 +4,16 @@
 
 ---
 
+## v0.1.0-beta.3 — 2026-03-03
+
+### Added
+- **Market Cap** column in watchlist table — formatted as `$3.86T`, `$500B`, `$2.3M`
+- **Industry** column — shown for equities
+- **Company logo** — small icon next to symbol (equities only, from Finnhub)
+- Extracted `src/utils/format.ts` — shared helpers for price, change and market cap formatting
+
+---
+
 ## v0.1.0-beta.2 — 2026-03-03
 
 ### Added
