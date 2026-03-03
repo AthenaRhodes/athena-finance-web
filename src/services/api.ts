@@ -5,11 +5,19 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api',
 });
 
+export interface SearchResult {
+  symbol: string;
+  displaySymbol: string;
+  description: string;
+  type: string;
+}
+
 export const securitiesApi = {
   getAll: () => api.get<Security[]>('/securities').then(r => r.data),
-  create: (data: { symbol: string; name: string; assetType: AssetType; exchange?: string; currency?: string }) =>
+  create: (data: { symbol: string; assetType: AssetType; name?: string; exchange?: string; currency?: string }) =>
     api.post<Security>('/securities', data).then(r => r.data),
   delete: (id: number) => api.delete(`/securities/${id}`),
+  search: (q: string) => api.get<SearchResult[]>('/search', { params: { q } }).then(r => r.data),
 };
 
 export const watchlistApi = {

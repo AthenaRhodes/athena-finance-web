@@ -4,6 +4,19 @@
 
 ---
 
+## v0.1.0-beta.4 — 2026-03-03
+
+### Added
+- **Add Security form** fully reworked with two tabs:
+  - 📈 **Equity / Bond** tab: live search by company name or ticker with debounced autocomplete; name auto-filled from Finnhub; Equity/Bond toggle
+  - 💱 **Forex** tab: separate base/quote currency inputs; live preview of Finnhub symbol (`OANDA:EUR_USD`); format hint shown
+- Name field removed from form — always resolved from Finnhub
+
+### Changed
+- `securitiesApi.create` — `name` is now optional
+
+---
+
 ## v0.1.0-beta.3 — 2026-03-03
 
 ### Added
