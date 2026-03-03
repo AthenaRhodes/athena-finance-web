@@ -1,6 +1,9 @@
 import type { WatchlistItem } from '../types';
 import { fmtPrice, fmtChange, fmtMarketCap, changeColor } from '../utils/format';
 
+const fmtReturn = (n: number | null | undefined) =>
+  n != null ? (n >= 0 ? '+' : '') + n.toFixed(2) + '%' : '—';
+
 interface Props {
   items: WatchlistItem[];
   onRemove: (id: number) => void;
@@ -26,6 +29,9 @@ export default function WatchlistTable({ items, onRemove, loading }: Props) {
             <th className="px-4 py-3 text-right">High</th>
             <th className="px-4 py-3 text-right">Low</th>
             <th className="px-4 py-3 text-right">Mkt Cap</th>
+            <th className="px-4 py-3 text-right">YTD</th>
+            <th className="px-4 py-3 text-right">52W High</th>
+            <th className="px-4 py-3 text-right">52W Low</th>
             <th className="px-4 py-3"></th>
           </tr>
         </thead>
@@ -62,6 +68,17 @@ export default function WatchlistTable({ items, onRemove, loading }: Props) {
               </td>
               <td className="px-4 py-3 text-right font-mono text-gray-300">
                 {fmtMarketCap(item.marketCapMillions)}
+              </td>
+              <td className={`px-4 py-3 text-right font-mono ${changeColor(item.metrics?.ytdReturn)}`}>
+                {fmtReturn(item.metrics?.ytdReturn)}
+              </td>
+              <td className="px-4 py-3 text-right font-mono text-gray-400"
+                title={item.metrics?.high52WDate ?? ''}>
+                {fmtPrice(item.metrics?.high52W ?? undefined)}
+              </td>
+              <td className="px-4 py-3 text-right font-mono text-gray-400"
+                title={item.metrics?.low52WDate ?? ''}>
+                {fmtPrice(item.metrics?.low52W ?? undefined)}
               </td>
               <td className="px-4 py-3 text-right">
                 <button

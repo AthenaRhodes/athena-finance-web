@@ -4,6 +4,15 @@
 
 ---
 
+## v0.1.0-beta.5 — 2026-03-03
+
+### Added
+- **YTD** return column — colour-coded green/red (equities only)
+- **52W High / 52W Low** columns — with date shown on hover
+- `Metrics` type added to match API response
+
+---
+
 ## v0.1.0-beta.4 — 2026-03-03
 
 ### Added
