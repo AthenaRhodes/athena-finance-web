@@ -53,7 +53,12 @@ function EquityBondPanel({ onAdded }: Props) {
     try {
       let security;
       try {
-        security = await securitiesApi.create({ symbol: selected.symbol, assetType: assetType as AssetType });
+        security = await securitiesApi.create({
+          symbol: selected.providerSymbol ?? selected.symbol,
+          assetType: assetType as AssetType,
+          priceSourceId: selected.providerId,
+          priceSourceSymbol: selected.providerSymbol !== selected.symbol ? selected.providerSymbol : undefined,
+        });
       } catch (err: any) {
         if (err.response?.status === 409) {
           const all = await securitiesApi.getAll();
@@ -103,11 +108,17 @@ function EquityBondPanel({ onAdded }: Props) {
         {results.length > 0 && !selected && (
           <ul className="absolute z-10 mt-1 w-full bg-gray-900 border border-gray-700 rounded-lg shadow-xl overflow-hidden">
             {results.map(r => (
-              <li key={r.symbol}
+              <li key={`${r.providerId}:${r.providerSymbol}`}
                 onClick={() => handleSelect(r)}
-                className="px-4 py-2.5 flex items-center justify-between hover:bg-gray-800 cursor-pointer">
-                <span className="text-gray-300 text-sm">{r.description}</span>
-                <span className="font-mono text-xs text-indigo-400 ml-3">{r.displaySymbol}</span>
+                className="px-4 py-2.5 flex items-center justify-between hover:bg-gray-800 cursor-pointer gap-2">
+                <span className="text-gray-300 text-sm truncate">{r.description}</span>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {r.exchange && <span className="text-gray-500 text-xs">{r.exchange}</span>}
+                  <span className="font-mono text-xs text-indigo-400">{r.displaySymbol}</span>
+                  {r.providerId === 'yahoo' && (
+                    <span className="text-xs bg-orange-900/50 text-orange-400 rounded px-1 py-0.5 leading-none">YF</span>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
@@ -117,7 +128,8 @@ function EquityBondPanel({ onAdded }: Props) {
       {selected && (
         <div className="flex items-center justify-between bg-gray-800/50 rounded-lg px-3 py-2 text-sm">
           <div>
-            <span className="font-mono text-indigo-400 font-semibold">{selected.symbol}</span>
+            <span className="font-mono text-indigo-400 font-semibold">{selected.providerSymbol ?? selected.symbol}</span>
+            {selected.exchange && <span className="text-gray-500 text-xs ml-1.5">{selected.exchange}</span>}
             <span className="text-gray-400 ml-2">{selected.description}</span>
           </div>
           <button onClick={handleAdd} disabled={loading}

@@ -10,11 +10,14 @@ export interface SearchResult {
   displaySymbol: string;
   description: string;
   type: string;
+  providerId: string;       // "finnhub" | "yahoo" | ...
+  providerSymbol: string;   // provider-specific symbol (may differ from symbol)
+  exchange: string;
 }
 
 export const securitiesApi = {
   getAll: () => api.get<Security[]>('/securities').then(r => r.data),
-  create: (data: { symbol: string; assetType: AssetType; name?: string; exchange?: string; currency?: string }) =>
+  create: (data: { symbol: string; assetType: AssetType; name?: string; exchange?: string; currency?: string; priceSourceId?: string; priceSourceSymbol?: string }) =>
     api.post<Security>('/securities', data).then(r => r.data),
   delete: (id: number) => api.delete(`/securities/${id}`),
   search: (q: string) => api.get<SearchResult[]>('/search', { params: { q } }).then(r => r.data),
